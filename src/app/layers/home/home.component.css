@@ -1,0 +1,20 @@
+.toolbar-item-spacer {
+  flex: 1 1 auto;
+}
+
+.app-container {
+  height: 90%;
+  margin: 0;
+}
+.app-sidenav {
+  width: 230px;
+}
+.app-sidenav-content {
+  height: 100%;
+  justify-content: center;
+  padding: 2%;
+}
+
+span{
+  margin-left: 2%;
+}

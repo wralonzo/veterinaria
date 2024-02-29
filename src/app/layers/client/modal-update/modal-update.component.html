@@ -1,0 +1,44 @@
+<div class="modalbar">
+  <mat-dialog-content class="mat-typography">
+    <h1 class="h1modal">Actualizar cliente</h1>
+    <form [formGroup]="formGroup">
+      <mat-dialog-content>
+        <mat-form-field style="width: 100%">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="name" /> </mat-form-field
+        ><br />
+        <mat-form-field style="width: 100%">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="surname" /> </mat-form-field
+        ><br />
+        <mat-form-field style="width: 100%">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="mobile" /> </mat-form-field
+        ><br />
+        <mat-form-field style="width: 100%">
+          <mat-label>Correo</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+          /> </mat-form-field
+        ><br />
+        <mat-form-field style="width: 100%">
+          <mat-label>Dirección</mat-label>
+          <input matInput formControlName="address" />
+        </mat-form-field>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button color="warn" (click)="closeDialog(null)">
+          Cancelar
+        </button>
+        <button mat-button color="primary" (click)="submitForm()">
+          Actualizar
+        </button>
+        <ng-container *ngIf="userType">
+          <button mat-button color="accent" (click)="delete()">Eliminar</button>
+        </ng-container>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+</div>

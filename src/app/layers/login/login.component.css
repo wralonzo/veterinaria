@@ -1,0 +1,18 @@
+.login-container {
+  margin-top: 05%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+mat-card {
+  padding: 20px;
+}
+.buttonlogin{
+  margin-right:5px;
+}
+
+.hlogin{
+  text-align: center;
+  color: white;
+}

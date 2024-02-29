@@ -1,0 +1,46 @@
+<div class="modalbar">
+  <mat-dialog-content class="mat-typography">
+    <h1 class="h1modal">Agregar Usuario</h1>
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+      <mat-dialog-content>
+        <mat-form-field style="width: 100%">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="name" /> </mat-form-field
+        ><br />
+        <mat-form-field style="width: 100%">
+          <mat-label>Apellidos</mat-label>
+          <input matInput formControlName="surname" /> </mat-form-field
+        ><br />
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Teléfono</mat-label>
+          <input matInput formControlName="mobile" /> </mat-form-field
+        ><br />
+        
+        <mat-form-field style="width: 100%">
+          <mat-label>Correo</mat-label>
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+          /> </mat-form-field
+        ><br />
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Tipo de Usuario</mat-label>
+          <mat-select formControlName="type">
+            <mat-option >Seleccione un tipo</mat-option>
+            <mat-option value="vendor">Vendedor</mat-option>
+            <mat-option value="admin">Administrador</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </mat-dialog-content>
+
+      <mat-dialog-actions>
+        <button mat-button (click)="closeDialog(null)">Cerrar</button>
+        <button mat-button color="primary" type="submit">Guardar</button>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+</div>
