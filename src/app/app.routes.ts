@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './layers/home/home.component';
 import { ClientComponent } from './layers/client/client.component';
+import { PetComponent } from './layers/client/pet/pet.component';
 import { UsersComponent } from './layers/users/users.component';
 import { LoginComponent } from './layers/login/login.component';
 import { AuthGuard } from './layers/shared/guard';
-import { PetComponent } from './layers/client/pet/pet.component';
 
 export const routes: Routes = [
   { path: 'login', title: 'Inicio de sesion', component: LoginComponent },
@@ -21,15 +21,6 @@ export const routes: Routes = [
         component: ClientComponent,
         canActivate: [AuthGuard],
         data: { rols: ['admin', 'vendor'] },
-        children: [
-          {
-            path: 'pet/:id',
-            title: 'Mascotas-Cliente',
-            component: PetComponent,
-            canActivate: [AuthGuard],
-            data: { rols: ['admin', 'vendor'] },
-          },
-        ],
       },
       {
         path: 'user',
@@ -39,11 +30,11 @@ export const routes: Routes = [
         data: { rols: ['admin'] },
       },
       {
-        path: 'pet',
-        title: 'Mascotas',
-        component: ClientComponent,
+        path: 'pet/:id/:clienteName',
+        title: 'Mascotas-Cliente',
+        component: PetComponent,
         canActivate: [AuthGuard],
-        data: { rols: ['admin', 'vendor', 'client'] },
+        data: { rols: ['admin', 'vendor'] },
       },
       {
         path: 'services',

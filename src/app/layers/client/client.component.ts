@@ -9,6 +9,7 @@ import { AxiosService } from '../shared/axios.service';
 import { IClient } from './interface/cliente-interface';
 import { SharedModule } from '../layer.module';
 import { ModalUpdateClientComponent } from './modal-update/modal-update.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client',
@@ -40,7 +41,8 @@ export class ClientComponent implements AfterViewInit, OnInit {
   constructor(
     private _liveAnnouncer: LiveAnnouncer,
     private dialog: MatDialog,
-    private axiosService: AxiosService
+    private axiosService: AxiosService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -124,5 +126,10 @@ export class ClientComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  redirectToPet(idClient: number, name: string) {
+    console.log('/client/pet/${idClient}');
+    this.router.navigateByUrl(`/admin/pet/${idClient}/${name}`);
   }
 }

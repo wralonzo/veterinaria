@@ -155,7 +155,7 @@
         mat-fab
         color="accent"
         aria-label="Ver mascotas"
-        [routerLink]="['./pet', element.id]"
+        (click)="redirectToPet(element.id, element.name)"
       >
         <mat-icon>pets</mat-icon>
       </button>

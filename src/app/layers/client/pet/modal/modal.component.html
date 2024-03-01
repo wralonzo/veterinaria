@@ -1,0 +1,35 @@
+<div class="modalbar">
+  <mat-dialog-content class="mat-typography">
+    <h1 class="h1modal">Agregar Mascota</h1>
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+      <mat-dialog-content>
+        <mat-form-field style="width: 100%">
+          <mat-label>Nombres</mat-label>
+          <input matInput formControlName="name" /> </mat-form-field
+        ><br />
+        <mat-form-field style="width: 100%">
+          <mat-label>Edad</mat-label>
+          <input matInput formControlName="age" /> </mat-form-field
+        ><br />
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Género</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option>Seleccione un tipo</mat-option>
+            <mat-option value="0">Hembra</mat-option>
+            <mat-option value="1">Macho</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br />
+        <mat-form-field style="width: 100%">
+          <mat-label>Raza</mat-label>
+          <input matInput formControlName="race" /> </mat-form-field
+        ><br />
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="closeDialog(null)">Cancelar</button>
+        <button mat-button color="primary" type="submit">Guardar</button>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+</div>

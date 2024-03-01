@@ -7,32 +7,32 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { AxiosService } from '../../shared/axios.service';
-import { IClient } from '../interface/cliente-interface';
 import { ModalUpdateClientComponent } from '../modal-update/modal-update.component';
-import { ModalComponent } from '../modal/modal.component';
+import { IPet } from './interface/pet';
+import { ModalPetComponent } from './modal/modal.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-pet',
+  selector: 'app-pet-add',
   standalone: true,
   imports: [SharedModule],
   templateUrl: './pet.component.html',
   styleUrl: './pet.component.css',
 })
 export class PetComponent implements AfterViewInit, OnInit {
-  elementData: IClient[] = [];
+  elementData: IPet[] = [];
   displayedColumns: string[] = [
     'id',
     'name',
-    'surname',
-    'email',
-    'mobile',
-    'address',
-    'user',
-    'passwordGenerate',
+    'age',
+    'gender',
+    'race',
     'actions',
   ];
+  clienteName: string = '';
+  idClient: number = 0;
 
-  dataSource = new MatTableDataSource<IClient>(this.elementData);
+  dataSource = new MatTableDataSource<IPet>(this.elementData);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,14 +42,16 @@ export class PetComponent implements AfterViewInit, OnInit {
     private _liveAnnouncer: LiveAnnouncer,
     private dialog: MatDialog,
     private axiosService: AxiosService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
     try {
       this.route.params.subscribe((params) => {
-        const id = params['id'];
-        this.getData(id);
+        this.clienteName = params['clienteName'];
+        this.idClient = params['id'];
+        this.getData();
       });
     } catch (error) {}
   }
@@ -58,6 +60,25 @@ export class PetComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  async delete(id: number) {
+    try {
+      const data: any = await this.axiosService.delete(`pet/${id}`, true);
+      if (data) {
+        this.openSnackBar('Se eliminó la mascota', 'Cerrar');
+        return;
+      }
+      this.openSnackBar('No se eliminó la mascota', 'Cerrar');
+      return;
+    } catch (error) {
+      this.openSnackBar('No se eliminó la mascota', 'Cerrar');
+    }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);
@@ -66,12 +87,23 @@ export class PetComponent implements AfterViewInit, OnInit {
     }
   }
 
-  openModal() {
-    const dialogRef = this.dialog.open(ModalComponent);
+  openModal(idClient: number) {
+    let findPet = this.elementData.find((item) => +item.client === +idClient);
+    if (!findPet) {
+      findPet = {
+        client: this.idClient,
+        id: 1,
+        name: '',
+        age: 1,
+        gender: '',
+        race: '',
+      };
+    }
+    const dialogRef = this.dialog.open(ModalPetComponent, { data: findPet });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.elementData.splice(0, 0, result);
-        this.dataSource = new MatTableDataSource<IClient>(this.elementData);
+        this.dataSource = new MatTableDataSource<IPet>(this.elementData);
         this.dataSource.paginator = this.paginator;
         this.table.renderRows();
       }
@@ -91,12 +123,12 @@ export class PetComponent implements AfterViewInit, OnInit {
         );
         if (result.delete) {
           this.elementData.splice(findIndex, 1);
-          this.dataSource = new MatTableDataSource<IClient>(this.elementData);
+          this.dataSource = new MatTableDataSource<IPet>(this.elementData);
           this.dataSource.paginator = this.paginator;
           this.table.renderRows();
         } else {
           this.elementData[findIndex] = result;
-          this.dataSource = new MatTableDataSource<IClient>(this.elementData);
+          this.dataSource = new MatTableDataSource<IPet>(this.elementData);
           this.dataSource.paginator = this.paginator;
           this.table.renderRows();
         }
@@ -104,12 +136,12 @@ export class PetComponent implements AfterViewInit, OnInit {
     });
   }
 
-  getData(id: string) {
+  getData() {
     try {
-      return this.axiosService.getApi('client').subscribe(
+      return this.axiosService.getApi(`pet/client/${this.idClient}`).subscribe(
         (response) => {
           this.elementData = response;
-          this.dataSource = new MatTableDataSource<IClient>(this.elementData);
+          this.dataSource = new MatTableDataSource<IPet>(this.elementData);
           this.dataSource.paginator = this.paginator;
           this.table.renderRows();
         },
