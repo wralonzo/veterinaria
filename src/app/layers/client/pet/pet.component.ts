@@ -11,6 +11,7 @@ import { ModalUpdateClientComponent } from '../modal-update/modal-update.compone
 import { IPet } from './interface/pet';
 import { ModalPetComponent } from './modal/modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ModalUpdatePetComponent } from './modal-update-pet/modal-update-pet.component';
 
 @Component({
   selector: 'app-pet-add',
@@ -60,20 +61,6 @@ export class PetComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  async delete(id: number) {
-    try {
-      const data: any = await this.axiosService.delete(`pet/${id}`, true);
-      if (data) {
-        this.openSnackBar('Se eliminó la mascota', 'Cerrar');
-        return;
-      }
-      this.openSnackBar('No se eliminó la mascota', 'Cerrar');
-      return;
-    } catch (error) {
-      this.openSnackBar('No se eliminó la mascota', 'Cerrar');
-    }
-  }
-
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,
@@ -110,17 +97,15 @@ export class PetComponent implements AfterViewInit, OnInit {
     });
   }
 
-  openModalEdit(idClient: string) {
-    const findClient = this.elementData.find((item) => item.id === +idClient);
-    const dialogRef = this.dialog.open(ModalUpdateClientComponent, {
+  openModalEdit(id: string) {
+    const findClient = this.elementData.find((item) => item.id === +id);
+    const dialogRef = this.dialog.open(ModalUpdatePetComponent, {
       width: '400px',
       data: findClient,
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const findIndex = this.elementData.findIndex(
-          (item) => item.id === +idClient
-        );
+        const findIndex = this.elementData.findIndex((item) => item.id === +id);
         if (result.delete) {
           this.elementData.splice(findIndex, 1);
           this.dataSource = new MatTableDataSource<IPet>(this.elementData);

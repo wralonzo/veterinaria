@@ -27,7 +27,7 @@ export class ModalPetComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required],
-      age: ['', Validators.required],
+      age: [null, Validators.required],
       gender: ['', Validators.required],
       race: ['', Validators.required],
     });
