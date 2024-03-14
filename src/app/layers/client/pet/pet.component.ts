@@ -12,6 +12,7 @@ import { IPet } from './interface/pet';
 import { ModalPetComponent } from './modal/modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalUpdatePetComponent } from './modal-update-pet/modal-update-pet.component';
+import { ModalPetServiceComponent } from './modal-pet-service/modal-update-pet.component';
 
 @Component({
   selector: 'app-pet-add',
@@ -95,6 +96,25 @@ export class PetComponent implements AfterViewInit, OnInit {
         this.table.renderRows();
       }
     });
+  }
+
+  openModalService(idClient: number) {
+    let findPet = this.elementData.find((item) => +item.client === +idClient);
+    if (!findPet) {
+      findPet = {
+        client: this.idClient,
+        id: 1,
+        name: '',
+        age: 1,
+        gender: '',
+        race: '',
+      };
+    }
+    const dialogRef = this.dialog.open(ModalPetServiceComponent, {
+      width: '500px',
+      data: findPet,
+    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   openModalEdit(id: string) {

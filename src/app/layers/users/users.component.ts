@@ -43,8 +43,8 @@ export class UsersComponent {
     'email',
     'mobile',
     'type',
-    'apps',
-    'rols',
+    // 'apps',
+    // 'rols',
     'user',
     'passwordGenerate',
   ];

@@ -6,6 +6,7 @@ import { UsersComponent } from './layers/users/users.component';
 import { LoginComponent } from './layers/login/login.component';
 import { AuthGuard } from './layers/shared/guard';
 import { ConsultComponent } from './layers/consult/consult.component';
+import { ServiceComponent } from './layers/service/service.component';
 
 export const routes: Routes = [
   { path: 'login', title: 'Inicio de sesion', component: LoginComponent },
@@ -47,9 +48,9 @@ export const routes: Routes = [
       {
         path: 'services',
         title: 'Servicios',
-        component: ClientComponent,
+        component: ServiceComponent,
         canActivate: [AuthGuard],
-        data: { rols: ['admin'] },
+        data: { rols: ['admin', 'vendor'] },
       },
       {
         path: 'vaccine',

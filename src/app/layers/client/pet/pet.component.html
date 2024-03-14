@@ -113,6 +113,15 @@
       >
         <mat-icon>delete</mat-icon>
       </button>
+      <button
+        class="btn-new"
+        mat-fab
+        color="primary"
+        aria-label="Agregar servicio"
+        (click)="openModalService(element.id)"
+      >
+        <mat-icon>add_circle</mat-icon>
+      </button>
     </td>
   </ng-container>
 
