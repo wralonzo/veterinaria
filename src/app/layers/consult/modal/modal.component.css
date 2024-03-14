@@ -1,0 +1,15 @@
+mat-card {
+  padding: 20px;
+}
+.modalbar {
+  margin-top: 05%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+}
+
+.h1modal{
+  text-align: center;
+  color: rgb(80, 80, 80);
+}

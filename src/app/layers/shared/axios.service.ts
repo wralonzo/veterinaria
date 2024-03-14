@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AxiosService {
   private readonly axios: AxiosInstance = axios;
-  private readonly urlApi: string = 'http://192.168.25.130:3000/api/v1/';
+  private readonly urlApi: string = 'http://localhost:3000/api/v1/';
   constructor() {
     this.axios = axios.create({
       headers: {

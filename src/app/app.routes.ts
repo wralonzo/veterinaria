@@ -5,6 +5,7 @@ import { PetComponent } from './layers/client/pet/pet.component';
 import { UsersComponent } from './layers/users/users.component';
 import { LoginComponent } from './layers/login/login.component';
 import { AuthGuard } from './layers/shared/guard';
+import { ConsultComponent } from './layers/consult/consult.component';
 
 export const routes: Routes = [
   { path: 'login', title: 'Inicio de sesion', component: LoginComponent },
@@ -33,6 +34,13 @@ export const routes: Routes = [
         path: 'pet/:id/:clienteName',
         title: 'Mascotas-Cliente',
         component: PetComponent,
+        canActivate: [AuthGuard],
+        data: { rols: ['admin', 'vendor'] },
+      },
+      {
+        path: 'consult',
+        title: 'Consultas',
+        component: ConsultComponent,
         canActivate: [AuthGuard],
         data: { rols: ['admin', 'vendor'] },
       },

@@ -1,0 +1,54 @@
+<div class="modalbar">
+  <mat-dialog-content class="mat-typography">
+    <h1 class="h1modal">Editar Consulta</h1>
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+      <mat-dialog-content>
+        <mat-form-field style="width: 100%">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name" /> </mat-form-field
+        ><br />
+        <mat-form-field style="width: 100%">
+          <mat-label>Descripcion</mat-label>
+          <input
+            matInput
+            placeholder="Ingrese un numero"
+            formControlName="description"
+          /> </mat-form-field
+        ><br />
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Cliente</mat-label>
+          <mat-select
+            formControlName="client"
+            (selectionChange)="onFirstSelectChange($event)"
+          >
+            <mat-option>Seleccione un tipo</mat-option>
+            <mat-option *ngFor="let option of clientData" [value]="option.id"
+              >{{ option.name }} {{ option.surname }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Mascota</mat-label>
+          <mat-select
+            formControlName="pet"
+            (selectionChange)="onFirstSelectChange($event)"
+          >
+            <mat-option>Seleccione una mascota</mat-option>
+            <mat-option *ngFor="let option of petData" [value]="option.id"
+              >{{ option.name }} {{ option.age }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="closeDialog(null)">Cancelar</button>
+        <button mat-button color="primary" type="submit">Guardar</button>
+        <ng-container *ngIf="userType">
+          <button mat-button color="accent" (click)="delete()">Eliminar</button>
+        </ng-container>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+</div>
