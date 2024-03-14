@@ -12,12 +12,7 @@
 </ng-container>
 <mat-form-field>
   <mat-label>Buscar</mat-label>
-  <input
-    matInput
-    (keyup)="applyFilter($event)"
-    placeholder="Ingrese texto a buscar"
-    #input
-  />
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese texto a buscar" #input />
 </mat-form-field>
 <table
   mat-table
@@ -27,7 +22,7 @@
   class="mat-elevation-z8"
 >
   <!-- Position Column -->
-  <ng-container matColumnDef="id">
+  <ng-container matColumnDef="idUser">
     <th
       mat-header-cell
       *matHeaderCellDef
@@ -36,7 +31,7 @@
     >
       Id.
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.idUser }}</td>
   </ng-container>
 
   <!-- Name Column -->
@@ -53,42 +48,86 @@
   </ng-container>
 
   <!-- Weight Column -->
-  <ng-container matColumnDef="pet">
+  <ng-container matColumnDef="surname">
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
       sortActionDescription="Sort by weight"
     >
-      Mascota
+      Apellidos
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.idPet }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.surname }}</td>
   </ng-container>
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="service">
+  <ng-container matColumnDef="email">
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
       sortActionDescription="Sort by email"
     >
-      Servicio
+      Correo
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.idService }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
   </ng-container>
 
   <!-- Symbol Column -->
-  <ng-container matColumnDef="datecreated">
+  <ng-container matColumnDef="mobile">
     <th
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
       sortActionDescription="Sort by mobile"
     >
-      Usuario
+      Contacto
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.dateCreated }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.mobile }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="type">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by address"
+    >
+      Tipo
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="rols">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by rols"
+    >
+      Roles
+    </th>
+    <td mat-cell *matCellDef="let element">
+
+      {{ element.rols.join(', ') }}
+    </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="apps">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by apps"
+    >
+      Apps
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.apps}}
+    </td>
   </ng-container>
 
   <!-- Symbol Column -->
@@ -97,11 +136,24 @@
       mat-header-cell
       *matHeaderCellDef
       mat-sort-header
-      sortActionDescription="Sort by address"
+      sortActionDescription="Sort by user"
     >
-      Fecha
+      Usuario
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.dateCreated }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.user }}</td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="passwordGenerate">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      mat-sort-header
+      sortActionDescription="Sort by passwordGenerate"
+    >
+      Clave
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.passwordGenerate }}</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

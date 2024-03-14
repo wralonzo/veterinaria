@@ -5,9 +5,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { AxiosService } from '../shared/axios.service';
-import { ModalComponentUser } from '../users/modal/modal.component';
 import { SharedModule } from '../layer.module';
 import { IPetService } from './interface/pet-service.interface';
+import { ModalServiceComponent } from './modal/modal.component';
+import { ModalPetServiceNewComponent } from './modal-pet-service/modal-update-pet.component';
 
 @Component({
   selector: 'app-service',
@@ -25,6 +26,7 @@ export class ServiceComponent {
     'user',
     'service',
     'datecreated',
+    'actions',
   ];
 
   dataSource = new MatTableDataSource<IPetService>(this.elementData);
@@ -58,17 +60,8 @@ export class ServiceComponent {
   }
 
   openModal() {
-    const dialogRef = this.dialog.open(ModalComponentUser);
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        result.apps = [];
-        result.rols = [];
-        // this.elementData.splice(0, 0, result);
-        this.dataSource = new MatTableDataSource<IPetService>(this.elementData);
-        this.dataSource.paginator = this.paginator;
-        this.table.renderRows();
-      }
-    });
+    const dialogRef = this.dialog.open(ModalServiceComponent);
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   getData() {
@@ -76,7 +69,9 @@ export class ServiceComponent {
       return this.axiosService.getApi('service/pet').subscribe(
         (response) => {
           this.elementData = response;
-          this.dataSource = new MatTableDataSource<IPetService>(this.elementData);
+          this.dataSource = new MatTableDataSource<IPetService>(
+            this.elementData
+          );
           this.dataSource.paginator = this.paginator;
           this.table.renderRows();
         },
@@ -96,5 +91,35 @@ export class ServiceComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openModalEdit(idClient: string) {
+    const findClient = this.elementData.find((item) => item.id === +idClient);
+    const dialogRef = this.dialog.open(ModalPetServiceNewComponent, {
+      width: '400px',
+      data: findClient,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const findIndex = this.elementData.findIndex(
+          (item) => item.id === +idClient
+        );
+        if (result.delete || result) {
+          this.elementData.splice(findIndex, 1);
+          this.dataSource = new MatTableDataSource<IPetService>(
+            this.elementData
+          );
+          this.dataSource.paginator = this.paginator;
+          this.table.renderRows();
+        } else {
+          this.elementData[findIndex] = result;
+          this.dataSource = new MatTableDataSource<IPetService>(
+            this.elementData
+          );
+          this.dataSource.paginator = this.paginator;
+          this.table.renderRows();
+        }
+      }
+    });
   }
 }

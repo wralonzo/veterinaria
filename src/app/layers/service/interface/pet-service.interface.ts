@@ -1,8 +1,12 @@
 export interface IPetService {
-  id: string;
+  id: number;
   name: string;
-  idPet: string;
+  idPet: number;
+  namePet: string;
   time: string;
-  idUserRegister: string;
-  idService: string;
+  idUserRegister: number;
+  nameUser: string;
+  idServicio: number;
+  nameServicio: string;
+  dateCreated: Date;
 }

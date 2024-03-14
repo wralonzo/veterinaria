@@ -1,13 +1,14 @@
 <ng-container matColumnDef="symbol">
   <h2>Listado de registros</h2>
   <button
+    style="margin-right: 3%"
     class="btn-new"
-    mat-fab
+    mat-raised-button
     color="primary"
     aria-label="Crear Registro"
     (click)="openModal()"
   >
-    <mat-icon>home</mat-icon>
+    Agregar servicio al catalogo
   </button>
 </ng-container>
 <mat-form-field>
@@ -62,7 +63,7 @@
     >
       Responsable
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.idService }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.nameUser }}</td>
   </ng-container>
 
   <!-- Symbol Column -->
@@ -75,7 +76,7 @@
     >
       Mascota
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.idPet }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.namePet }}</td>
   </ng-container>
 
   <!-- Symbol Column -->
@@ -88,7 +89,7 @@
     >
       Servicio
     </th>
-    <td mat-cell *matCellDef="let element">{{ element.idService }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.nameServicio }}</td>
   </ng-container>
 
   <!-- Symbol Column -->
@@ -115,7 +116,7 @@
       Acciones
     </th>
     <td mat-cell *matCellDef="let element">
-      <!-- <button
+      <button
         class="btn-action"
         mat-fab
         color="primary"
@@ -123,7 +124,7 @@
         (click)="openModalEdit(element.id)"
       >
         <mat-icon>edit</mat-icon>
-      </button> -->
+      </button>
     </td>
   </ng-container>
 
