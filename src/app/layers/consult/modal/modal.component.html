@@ -23,7 +23,7 @@
 
         <mat-form-field style="width: 100%">
           <mat-label>Mascota</mat-label>
-          <mat-select formControlName="pet" (selectionChange)="onFirstSelectChange($event)">
+          <mat-select formControlName="pet">
             <mat-option>Seleccione una mascota</mat-option>
             <mat-option *ngFor="let option of petData" [value]="option.id"
               >{{ option.name }} {{ option.age }}</mat-option
