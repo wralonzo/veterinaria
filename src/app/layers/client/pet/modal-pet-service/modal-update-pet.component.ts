@@ -43,7 +43,6 @@ export class ModalPetServiceComponent {
   }
 
   async submitForm() {
-    debugger;
     if (this.formGroup.valid) {
       const payload = {
         name: this.formGroup.value.name,

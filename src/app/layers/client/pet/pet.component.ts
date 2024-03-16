@@ -99,17 +99,7 @@ export class PetComponent implements AfterViewInit, OnInit {
   }
 
   openModalService(idClient: number) {
-    let findPet = this.elementData.find((item) => +item.client === +idClient);
-    if (!findPet) {
-      findPet = {
-        client: this.idClient,
-        id: 1,
-        name: '',
-        age: 1,
-        gender: '',
-        race: '',
-      };
-    }
+    let findPet = this.elementData.find((item) => +item.id === +idClient);
     const dialogRef = this.dialog.open(ModalPetServiceComponent, {
       width: '500px',
       data: findPet,
