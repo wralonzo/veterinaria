@@ -1,0 +1,28 @@
+<div class="modalbar">
+  <mat-dialog-content class="mat-typography">
+    <h1 class="h1modal">Agregar Examén</h1>
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+      <mat-dialog-content>
+        <mat-form-field style="width: 100%">
+          <mat-label>Observaciones de constancia</mat-label>
+          <input matInput formControlName="comentario" /> </mat-form-field
+        ><br />
+
+        <mat-form-field style="width: 100%">
+          <mat-label>Mascota</mat-label>
+          <mat-select formControlName="pet">
+            <mat-option>Seleccione una mascota</mat-option>
+            <mat-option *ngFor="let option of petData" [value]="option.id"
+              >{{ option.name }} {{ option.age }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <br />
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button mat-button (click)="closeDialog(null)">Cancelar</button>
+        <button mat-button color="primary" type="submit">Guardar</button>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+</div>

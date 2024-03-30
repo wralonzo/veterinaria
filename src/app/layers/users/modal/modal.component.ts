@@ -40,7 +40,6 @@ export class ModalComponentUser implements OnInit {
   }
 
   async submitForm() {
-    debugger;
     if (this.formGroup.valid) {
       const typeUserForm = this.formGroup.value.type;
       const payload = {

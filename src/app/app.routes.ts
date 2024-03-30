@@ -7,6 +7,9 @@ import { LoginComponent } from './layers/login/login.component';
 import { AuthGuard } from './layers/shared/guard';
 import { ConsultComponent } from './layers/consult/consult.component';
 import { ServiceComponent } from './layers/service/service.component';
+import { ExamenComponent } from './layers/examen/examen.component';
+import { ReservationComponent } from './layers/reservation/reservation.component';
+import { ConstancyComponent } from './layers/constancy/constancy.component';
 
 export const routes: Routes = [
   { path: 'login', title: 'Inicio de sesion', component: LoginComponent },
@@ -56,6 +59,27 @@ export const routes: Routes = [
         path: 'vaccine',
         title: 'Vacunas',
         component: ClientComponent,
+        canActivate: [AuthGuard],
+        data: { rols: ['admin', 'vendor'] },
+      },
+      {
+        path: 'examen',
+        title: 'Examenes',
+        component: ExamenComponent,
+        canActivate: [AuthGuard],
+        data: { rols: ['admin', 'vendor'] },
+      },
+      {
+        path: 'reservation',
+        title: 'Reservaciones',
+        component: ReservationComponent,
+        canActivate: [AuthGuard],
+        data: { rols: ['admin', 'vendor'] },
+      },
+      {
+        path: 'constancy',
+        title: 'Constancias',
+        component: ConstancyComponent,
         canActivate: [AuthGuard],
         data: { rols: ['admin', 'vendor'] },
       },
