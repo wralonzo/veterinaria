@@ -108,7 +108,7 @@
         class="btn-new"
         mat-fab
         color="primary"
-        aria-label="Editar cliente"
+        title="Editar cliente"
         (click)="openModalEdit(element.id)"
       >
         <mat-icon>delete</mat-icon>
@@ -116,15 +116,26 @@
       <span> </span>
       <button
         class="btn-new"
-        style="margin-left: 3%;"
+        style="margin-left: 3%"
         mat-fab
         color="primary"
-        aria-label="Agregar servicio"
+        atitle="Agregar servicio"
         (click)="openModalService(element.id)"
       >
-        <mat-icon>medical_information</mat-icon>
+      <mat-icon>medical_information</mat-icon>
+      </button>
+
+      <span> </span>
+      <button 
+        class="btn-new"
+        mat-fab color="warn"
+        title="Ver historial"
+        style="margin-left: 3%"
+        (click)="redirectToPet(element.id)">
+        <mat-icon>monitoring</mat-icon>
       </button>
     </td>
+
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -134,6 +145,6 @@
 <mat-paginator
   [pageSizeOptions]="[5, 10, 20, 30]"
   showFirstLastButtons
-  aria-label="Cleintes"
+  aria-label="Clientes"
 >
 </mat-paginator>

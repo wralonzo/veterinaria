@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { SharedModule } from '../../layer.module';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -45,7 +45,8 @@ export class PetComponent implements AfterViewInit, OnInit {
     private dialog: MatDialog,
     private axiosService: AxiosService,
     private route: ActivatedRoute,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -156,5 +157,9 @@ export class PetComponent implements AfterViewInit, OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  redirectToPet(idPet: number) {
+    this.router.navigateByUrl(`/admin/tracking/${idPet}`);
   }
 }
