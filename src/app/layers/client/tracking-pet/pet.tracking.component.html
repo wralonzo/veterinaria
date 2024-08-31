@@ -3,6 +3,21 @@
 </ng-container>
 
 <ng-container matColumnDef="symbol">
+  <ng-container matColumnDef="symbol">
+    <h2>Ver pdf</h2>
+  </ng-container>
+  <button
+    class="btn-new"
+    mat-fab
+    color="primary"
+    aria-label="Crear cliente"
+    (click)="getpdf()"
+  >
+    <mat-icon>picture_as_pdf</mat-icon>
+  </button>
+</ng-container>
+<br /><br />
+<ng-container matColumnDef="symbol">
   <h2>Consultas</h2>
 </ng-container>
 <!-- Consultas -->
@@ -336,7 +351,11 @@
 
   <!-- Weight Column -->
   <ng-container matColumnDef="servicio">
-    <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by servicio">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      sortActionDescription="Sort by servicio"
+    >
       Servicio
     </th>
     <td mat-cell *matCellDef="let element">{{ element.servicio }}</td>

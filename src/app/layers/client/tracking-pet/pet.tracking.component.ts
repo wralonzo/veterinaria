@@ -7,7 +7,14 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { AxiosService } from '../../shared/axios.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Constancia, Consulta, Examene, ITracking, Reservacione, Servicio } from './interface/pet';
+import {
+  Constancia,
+  Consulta,
+  Examene,
+  ITracking,
+  Reservacione,
+  Servicio,
+} from './interface/pet';
 
 @Component({
   selector: 'app-pet-add',
@@ -22,20 +29,10 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
   elementDataR: Reservacione[] = [];
   elementDataC: Constancia[] = [];
   elementDataS: Servicio[] = [];
-  
-  displayedColumns: string[] = [
-    'id',
-    'name',
-    'description',
-    'dateCreated',
-  ];
 
-  displayedColumnsE: string[] = [
-    'id',
-    'diagnostico',
-    'motivo',
-    'createdAt',
-  ];
+  displayedColumns: string[] = ['id', 'name', 'description', 'dateCreated'];
+
+  displayedColumnsE: string[] = ['id', 'diagnostico', 'motivo', 'createdAt'];
 
   displayedColumnsR: string[] = [
     'id',
@@ -47,11 +44,7 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
     'createdAt',
   ];
 
-  displayedColumnsC: string[] = [
-    'id',
-    'comentario',
-    'createdAt',
-  ];
+  displayedColumnsC: string[] = ['id', 'comentario', 'createdAt'];
 
   displayedColumnsS: string[] = [
     'id',
@@ -83,7 +76,7 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sortR!: MatSort;
   @ViewChild(MatTable) tableR!: MatTable<any>;
 
-   // Constancias
+  // Constancias
   @ViewChild('paginatorC') paginatorC!: MatPaginator;
   @ViewChild(MatSort) sortC!: MatSort;
   @ViewChild(MatTable) tableC!: MatTable<any>;
@@ -123,41 +116,57 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
 
   getData() {
     try {
-      return this.axiosService.getApi(`client/tracking?idPet=${this.idClient}`).subscribe(
-        (response) => {
-          // consulta
-          this.elementData = response.consultas;
-          this.dataSource = new MatTableDataSource<Consulta>(this.elementData);
-          this.dataSource.paginator = this.paginatorS;
-          this.table.renderRows();
+      return this.axiosService
+        .getApi(`client/tracking?idPet=${this.idClient}`)
+        .subscribe(
+          (response) => {
+            // consulta
+            this.elementData = response.consultas;
+            this.dataSource = new MatTableDataSource<Consulta>(
+              this.elementData
+            );
+            this.dataSource.paginator = this.paginatorS;
+            this.table.renderRows();
 
-          //examen
-          this.elementDataE = response.examenes;
-          this.dataSourceE = new MatTableDataSource<Examene>(this.elementDataE);
-          this.dataSourceE.paginator = this.paginatorE;
-          this.tableE.renderRows();
+            //examen
+            this.elementDataE = response.examenes;
+            this.dataSourceE = new MatTableDataSource<Examene>(
+              this.elementDataE
+            );
+            this.dataSourceE.paginator = this.paginatorE;
+            this.tableE.renderRows();
 
-          this.elementDataR = response.reservaciones;
-          this.dataSourceR = new MatTableDataSource<Reservacione>(this.elementDataR);
-          this.dataSourceR.paginator = this.paginatorR;
-          this.tableR.renderRows();
+            this.elementDataR = response.reservaciones;
+            this.dataSourceR = new MatTableDataSource<Reservacione>(
+              this.elementDataR
+            );
+            this.dataSourceR.paginator = this.paginatorR;
+            this.tableR.renderRows();
 
-          this.elementDataC = response.constancias;
-          this.dataSourceC = new MatTableDataSource<Constancia>(this.elementDataC);
-          this.dataSourceC.paginator = this.paginatorR;
-          this.tableC.renderRows();
+            this.elementDataC = response.constancias;
+            this.dataSourceC = new MatTableDataSource<Constancia>(
+              this.elementDataC
+            );
+            this.dataSourceC.paginator = this.paginatorR;
+            this.tableC.renderRows();
 
-          this.elementDataS = response.servicios;
-          this.dataSourceS = new MatTableDataSource<Servicio>(this.elementDataS);
-          this.dataSourceS.paginator = this.paginatorSer;
-          this.tableSer.renderRows();
-        },
-        (error) => {
-          console.error('Error fetching data:', error);
-        }
-      );
+            this.elementDataS = response.servicios;
+            this.dataSourceS = new MatTableDataSource<Servicio>(
+              this.elementDataS
+            );
+            this.dataSourceS.paginator = this.paginatorSer;
+            this.tableSer.renderRows();
+          },
+          (error) => {
+            console.error('Error fetching data:', error);
+          }
+        );
     } catch (error) {
       return [];
     }
+  }
+
+  public async getpdf() {
+    window.open(`${this.axiosService.urlApiPdf}${this.idClient}`, "_blank");
   }
 }
