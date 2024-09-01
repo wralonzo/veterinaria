@@ -16,7 +16,7 @@
           <mat-label>Teléfono</mat-label>
           <input matInput formControlName="mobile" /> </mat-form-field
         ><br />
-        
+
         <mat-form-field style="width: 100%">
           <mat-label>Correo</mat-label>
           <input
@@ -29,12 +29,23 @@
         <mat-form-field style="width: 100%">
           <mat-label>Tipo de Usuario</mat-label>
           <mat-select formControlName="type">
-            <mat-option >Seleccione un tipo</mat-option>
+            <mat-option>Seleccione un tipo</mat-option>
             <mat-option value="vendor">Vendedor</mat-option>
             <mat-option value="admin">Administrador</mat-option>
           </mat-select>
         </mat-form-field>
 
+        <!-- <input type="file" [(ngModel)]="files"  /> -->
+        <button mat-button (click)="fileInput.click()">
+          Seleccionar imagen {{ files?.name }}
+        </button>
+        <input
+          type="file"
+          #fileInput
+          hidden
+          (change)="onFileSelected($event)"
+        />
+        <br />
       </mat-dialog-content>
 
       <mat-dialog-actions>

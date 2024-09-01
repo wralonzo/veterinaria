@@ -1,0 +1,29 @@
+<ng-container matColumnDef="symbol">
+  <h2>Mi Perfil</h2>
+</ng-container>
+
+<ng-container>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title
+        >Nombre: {{ user.name }} {{ user.surname }}</mat-card-title
+      >
+      <mat-card-subtitle>Correo: {{ user.email }}</mat-card-subtitle>
+    </mat-card-header>
+    <img
+      *ngIf="images"
+      mat-card-image
+      [src]="images[0].url"
+      width="20%"
+      alt="Photo of a Shiba Inu"
+    />
+    <mat-card-content>
+      <p>Usuario: {{ user.user }}</p>
+    </mat-card-content>
+    <mat-card-actions> </mat-card-actions>
+  </mat-card>
+</ng-container>
+
+<ng-container *ngIf="images" matColumnDef="symbol">
+  <img *ngFor="let image of images" width="10%" [src]="image.url" />
+</ng-container>

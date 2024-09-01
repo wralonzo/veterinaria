@@ -11,6 +11,7 @@ import { ExamenComponent } from './layers/examen/examen.component';
 import { ReservationComponent } from './layers/reservation/reservation.component';
 import { ConstancyComponent } from './layers/constancy/constancy.component';
 import { PetTrackingComponent } from './layers/client/tracking-pet/pet.tracking.component';
+import { ProfileComponent } from './layers/profile/profile.component';
 
 export const routes: Routes = [
   { path: 'login', title: 'Inicio de sesion', component: LoginComponent },
@@ -88,6 +89,13 @@ export const routes: Routes = [
         path: 'tracking/:id',
         title: 'Historial',
         component: PetTrackingComponent,
+        canActivate: [AuthGuard],
+        data: { rols: ['admin', 'vendor'] },
+      },
+      {
+        path: 'profile',
+        title: 'Historial',
+        component: ProfileComponent,
         canActivate: [AuthGuard],
         data: { rols: ['admin', 'vendor'] },
       },

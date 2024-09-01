@@ -13,14 +13,13 @@ import { SharedModalModule } from '../../modal.module';
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [
-    SharedModalModule
-  ],
+  imports: [SharedModalModule],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.css',
 })
 export class ModalComponentUser implements OnInit {
   formGroup!: FormGroup;
+  files?: File;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,6 +51,7 @@ export class ModalComponentUser implements OnInit {
       const data: any = await this.axiosService.post('user', payload, true);
       if (data) {
         data.type = payload.typeUser;
+        await this.sendImage(data.id, this.files);
         this.openSnackBar('Se agrego un cliente', 'Cerrar');
         this.closeDialog(data);
         return;
@@ -70,7 +70,26 @@ export class ModalComponentUser implements OnInit {
     this.dialogRef.close(data);
   }
 
-  onChangeSelect(){
+  onChangeSelect() {
     console.log(this.formGroup.value.type);
   }
+
+  private async sendImage(idUser: string, files: any) {
+    try {
+      const formData = new FormData();
+      formData.append('user', idUser);
+      formData.append('tag', 'user');
+      formData.append('idReg', idUser);
+      formData.append('file', files);
+      const data = await this.axiosService.postImage('upload', formData);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  public onFileSelected = (event: any & { target: any }) => {
+    this.files = event.target.files?.[0];
+  };
 }

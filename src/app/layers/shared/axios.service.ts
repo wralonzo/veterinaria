@@ -10,6 +10,7 @@ export class AxiosService {
   private readonly urlApi: string =
     'https://api-veterinaria-production.up.railway.app/api/v1/';
   public readonly urlApiPdf = 'http://localhost:8080/pdf/';
+  public readonly urlApiImage = 'http://localhost:8081/';
   constructor() {
     this.axios = axios.create({
       headers: {
@@ -41,6 +42,17 @@ export class AxiosService {
     }
   }
 
+  async getImages<T>(url: string): Promise<T> {
+    try {
+      const response: AxiosResponse = await this.axios.get(
+        `${this.urlApiImage}${url}`
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async post<T>(url: string, body: any, isActive: boolean = false): Promise<T> {
     try {
       if (isActive) {
@@ -59,6 +71,23 @@ export class AxiosService {
       const response: AxiosResponse = await this.axios.post(
         `${this.urlApi}${url}`,
         body
+      );
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async postImage<T>(url: string, body: any): Promise<T> {
+    try {
+      const response: AxiosResponse = await this.axios.post(
+        `${this.urlApiImage}${url}`,
+        body,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
       );
       return response.data;
     } catch (error) {
