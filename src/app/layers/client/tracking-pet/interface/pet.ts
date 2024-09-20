@@ -48,3 +48,10 @@ export interface Servicio {
   servicio:    string;
   dateCreated: Date;
 }
+
+export interface Medicamento {
+  id:           number;
+  name:         string;
+  description:  number;
+  dateCreated:  Date;
+}

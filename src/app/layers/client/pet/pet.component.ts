@@ -13,6 +13,7 @@ import { ModalPetComponent } from './modal/modal.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ModalUpdatePetComponent } from './modal-update-pet/modal-update-pet.component';
 import { ModalPetServiceComponent } from './modal-pet-service/modal-update-pet.component';
+import { ModalPetMedicamentoComponent } from './modal-pet-medicamento/modal-pet.medicamento.component';
 
 @Component({
   selector: 'app-pet-add',
@@ -46,7 +47,7 @@ export class PetComponent implements AfterViewInit, OnInit {
     private axiosService: AxiosService,
     private route: ActivatedRoute,
     private _snackBar: MatSnackBar,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -102,6 +103,15 @@ export class PetComponent implements AfterViewInit, OnInit {
   openModalService(idClient: number) {
     let findPet = this.elementData.find((item) => +item.id === +idClient);
     const dialogRef = this.dialog.open(ModalPetServiceComponent, {
+      width: '500px',
+      data: findPet,
+    });
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  openModalMedicamento(idClient: number) {
+    let findPet = this.elementData.find((item) => +item.id === +idClient);
+    const dialogRef = this.dialog.open(ModalPetMedicamentoComponent, {
       width: '500px',
       data: findPet,
     });

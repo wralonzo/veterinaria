@@ -12,6 +12,7 @@ import {
   Consulta,
   Examene,
   ITracking,
+  Medicamento,
   Reservacione,
   Servicio,
 } from './interface/pet';
@@ -29,8 +30,15 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
   elementDataR: Reservacione[] = [];
   elementDataC: Constancia[] = [];
   elementDataS: Servicio[] = [];
+  elementDatamedicamento: Medicamento[] = [];
 
   displayedColumns: string[] = ['id', 'name', 'description', 'dateCreated'];
+  displayedColumnMedicamentos: string[] = [
+    'id',
+    'name',
+    'description',
+    'createdAt',
+  ];
 
   displayedColumnsE: string[] = ['id', 'diagnostico', 'motivo', 'createdAt'];
 
@@ -60,6 +68,9 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
   dataSourceR = new MatTableDataSource<Reservacione>(this.elementDataR);
   dataSourceC = new MatTableDataSource<Constancia>(this.elementDataC);
   dataSourceS = new MatTableDataSource<Servicio>(this.elementDataS);
+  dataSourceMedicamentos = new MatTableDataSource<Medicamento>(
+    this.elementDatamedicamento
+  );
 
   // consult
   @ViewChild('paginatorS') paginatorS!: MatPaginator;
@@ -86,6 +97,11 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sortSer!: MatSort;
   @ViewChild(MatTable) tableSer!: MatTable<any>;
 
+  // medicamento
+  @ViewChild('paginatorSer') paginatorMedicamento!: MatPaginator;
+  @ViewChild(MatSort) sortmedicamento!: MatSort;
+  @ViewChild(MatTable) tablemedicamento!: MatTable<any>;
+
   constructor(
     private axiosService: AxiosService,
     private route: ActivatedRoute,
@@ -106,6 +122,7 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
     this.dataSourceE.paginator = this.paginatorE;
     this.dataSourceC.paginator = this.paginatorC;
     this.dataSourceS.paginator = this.paginatorSer;
+    this.dataSourceMedicamentos.paginator = this.paginatorMedicamento;
   }
 
   openSnackBar(message: string, action: string) {
@@ -156,6 +173,13 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
             );
             this.dataSourceS.paginator = this.paginatorSer;
             this.tableSer.renderRows();
+
+            this.elementDatamedicamento = response.medicamentos;
+            this.dataSourceMedicamentos = new MatTableDataSource<Medicamento>(
+              this.elementDatamedicamento
+            );
+            this.dataSourceMedicamentos.paginator = this.paginatorMedicamento;
+            this.tablemedicamento.renderRows();
           },
           (error) => {
             console.error('Error fetching data:', error);
@@ -167,6 +191,6 @@ export class PetTrackingComponent implements AfterViewInit, OnInit {
   }
 
   public async getpdf() {
-    window.open(`${this.axiosService.urlApiPdf}${this.idClient}`, "_blank");
+    window.open(`${this.axiosService.urlApiPdf}${this.idClient}`, '_blank');
   }
 }
