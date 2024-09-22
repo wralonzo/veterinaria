@@ -61,7 +61,7 @@ export class ModalUpdateComponentUser implements OnInit {
         if (this.files) {
           await this.sendImage(this.data.idUser.toString(), this.files);
         }
-        this.openSnackBar('Se agrego un usuario', 'Cerrar');
+        this.openSnackBar('Se modifico el usuario', 'Cerrar');
         const responseModal: IUser = {
           idUser: this.data.idUser,
           name: payload.name,
