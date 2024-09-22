@@ -13,7 +13,10 @@
         ><br />
         <mat-form-field style="width: 100%">
           <mat-label>Cliente</mat-label>
-          <mat-select formControlName="client" (selectionChange)="onFirstSelectChange($event)">
+          <mat-select
+            formControlName="client"
+            (selectionChange)="onFirstSelectChange($event)"
+          >
             <mat-option>Seleccione un tipo</mat-option>
             <mat-option *ngFor="let option of clientData" [value]="option.id"
               >{{ option.name }} {{ option.surname }}</mat-option
@@ -33,7 +36,9 @@
         <br />
       </mat-dialog-content>
       <mat-dialog-actions>
-        <button mat-button (click)="closeDialog(null)">Cancelar</button>
+        <button mat-button type="button" (click)="closeDialog(null)">
+          Cancelar
+        </button>
         <button mat-button color="primary" type="submit">Guardar</button>
       </mat-dialog-actions>
     </form>

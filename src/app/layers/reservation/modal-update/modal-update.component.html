@@ -57,10 +57,14 @@
         </mat-form-field>
       </mat-dialog-content>
       <mat-dialog-actions>
-        <button mat-button (click)="closeDialog(null)">Cancelar</button>
+        <button mat-button type="button" (click)="closeDialog(null)">
+          Cancelar
+        </button>
         <button mat-button color="primary" type="submit">Guardar</button>
         <ng-container *ngIf="userType">
-          <button mat-button color="accent" (click)="delete()">Eliminar</button>
+          <button mat-button type="button" color="accent" (click)="delete()">
+            Eliminar
+          </button>
         </ng-container>
       </mat-dialog-actions>
     </form>

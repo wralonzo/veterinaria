@@ -9,7 +9,12 @@
         ><br />
         <mat-form-field style="width: 100%">
           <mat-label>Edad</mat-label>
-          <input matInput type="number" placeholder="Ingrese un numero"  formControlName="age" /> </mat-form-field
+          <input
+            matInput
+            type="number"
+            placeholder="Ingrese un numero"
+            formControlName="age"
+          /> </mat-form-field
         ><br />
 
         <mat-form-field style="width: 100%">
@@ -27,7 +32,9 @@
         ><br />
       </mat-dialog-content>
       <mat-dialog-actions>
-        <button mat-button (click)="closeDialog(null)">Cancelar</button>
+        <button mat-button type="button" (click)="closeDialog(null)">
+          Cancelar
+        </button>
         <button mat-button color="primary" type="submit">Guardar</button>
         <ng-container *ngIf="userType">
           <button mat-button color="accent" (click)="delete()">Eliminar</button>
