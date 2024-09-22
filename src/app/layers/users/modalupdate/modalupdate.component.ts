@@ -88,7 +88,7 @@ export class ModalUpdateComponentUser implements OnInit {
     });
   }
   closeDialog(data: any) {
-    this.dialogRef.close(null);
+    this.dialogRef.close(data);
   }
 
   onChangeSelect() {
