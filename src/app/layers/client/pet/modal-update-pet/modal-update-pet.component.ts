@@ -22,6 +22,8 @@ import { SharedModalModule } from '../../../modal.module';
 export class ModalUpdatePetComponent {
   formGroup!: FormGroup;
   userType: boolean = false;
+  public files?: File;
+  public images: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,6 +40,7 @@ export class ModalUpdatePetComponent {
       gender: new FormControl(this.data.gender.toString(), Validators.required),
       race: [this.data.race, Validators.required],
     });
+    this.loadDataImage();
     this.userType = localStorage.getItem('type') == 'admin' ? true : false;
   }
 
@@ -56,6 +59,13 @@ export class ModalUpdatePetComponent {
         true
       );
       if (data) {
+        if (this.files) {
+          await this.sendImage(
+            localStorage.getItem('idUser') ?? '',
+            this.files,
+            this.data.id.toString()
+          );
+        }
         this.openSnackBar('Se Modifico el registro ' + name, 'Cerrar');
         this.closeDialog({
           name: this.formGroup.value.name,
@@ -99,5 +109,35 @@ export class ModalUpdatePetComponent {
 
   closeDialog(data: any) {
     this.dialogRef.close(data);
+  }
+
+  private async sendImage(idUser: string, files: any, idPet: string) {
+    try {
+      const formData = new FormData();
+      formData.append('user', idUser);
+      formData.append('tag', 'pet');
+      formData.append('idReg', idPet);
+      formData.append('file', files);
+      const data = await this.axiosService.postImage('upload', formData);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  public onFileSelected = (event: any & { target: any }) => {
+    this.files = event.target.files?.[0];
+  };
+
+  private async loadDataImage() {
+    try {
+      const dataImages = await this.axiosService.getImages<any>(
+        `urls?tag=pet&idReg=${this.data.id}`
+      );
+      this.images = dataImages.data;
+    } catch (error) {
+      this.images = [];
+    }
   }
 }

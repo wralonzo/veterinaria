@@ -15,6 +15,7 @@ import { IPet } from '../interface/pet';
 })
 export class ModalPetComponent implements OnInit {
   formGroup!: FormGroup;
+  files?: File;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,6 +47,9 @@ export class ModalPetComponent implements OnInit {
 
       const data: any = await this.axiosService.post('pet', payload, true);
       if (data) {
+        if (this.files) {
+          await this.sendImage(payload.idUser ?? '1', this.files, data.id);
+        }
         this.openSnackBar('Se agrego un cliente', 'Cerrar');
         this.closeDialog(data);
         return;
@@ -63,4 +67,23 @@ export class ModalPetComponent implements OnInit {
   closeDialog(data: any) {
     this.dialogRef.close(data);
   }
+
+  private async sendImage(idUser: string, files: any, idPet: string) {
+    try {
+      const formData = new FormData();
+      formData.append('user', idUser);
+      formData.append('tag', 'pet');
+      formData.append('idReg', idPet);
+      formData.append('file', files);
+      const data = await this.axiosService.postImage('upload', formData);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  }
+
+  public onFileSelected = (event: any & { target: any }) => {
+    this.files = event.target.files?.[0];
+  };
 }

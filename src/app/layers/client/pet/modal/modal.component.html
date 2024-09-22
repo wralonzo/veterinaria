@@ -30,6 +30,17 @@
           <mat-label>Raza</mat-label>
           <input matInput formControlName="race" /> </mat-form-field
         ><br />
+
+        <button mat-button (click)="fileInput.click()">
+          Seleccionar imagen {{ files?.name }}
+        </button>
+        <input
+          type="file"
+          #fileInput
+          hidden
+          (change)="onFileSelected($event)"
+        />
+        <br />
       </mat-dialog-content>
       <mat-dialog-actions>
         <button mat-button type="button" (click)="closeDialog(null)">
