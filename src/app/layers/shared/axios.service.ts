@@ -7,9 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class AxiosService {
   private readonly axios: AxiosInstance = axios;
-  // private readonly urlApi: string =
-  //   'https://api-veterinaria-production.up.railway.app/api/v1/';
-  private readonly urlApi: string = 'http://localhost:3000/api/v1/';
+  private readonly urlApi: string =
+    'https://api-veterinaria-production.up.railway.app/api/v1/';
   public readonly urlApiPdf = 'http://localhost:8080/pdf/';
   public readonly urlApiImage = 'http://localhost:8081/';
   constructor() {

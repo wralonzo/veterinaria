@@ -16,6 +16,7 @@ import { ModalComponentUser } from './modal/modal.component';
 import { ModalComponent } from '../client/modal/modal.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ModalUpdateComponentUser } from './modalupdate/modalupdate.component';
 
 @Component({
   selector: 'app-users',
@@ -47,6 +48,7 @@ export class UsersComponent {
     // 'rols',
     'user',
     'passwordGenerate',
+    'actions',
   ];
 
   dataSource = new MatTableDataSource<IUser>(this.elementData);
@@ -127,5 +129,35 @@ export class UsersComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openModalEdit(idClient: string) {
+    const findClient = this.elementData.find(
+      (item) => item.idUser === +idClient
+    );
+    console;
+    const dialogRef = this.dialog.open(ModalUpdateComponentUser, {
+      width: '600px',
+      data: findClient,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log(result);
+        const findIndex = this.elementData.findIndex(
+          (item) => item.idUser === +idClient
+        );
+        if (result.delete) {
+          this.elementData.splice(findIndex, 1);
+          this.dataSource = new MatTableDataSource<IUser>(this.elementData);
+          this.dataSource.paginator = this.paginator;
+          this.table.renderRows();
+        } else {
+          this.elementData[findIndex] = result;
+          this.dataSource = new MatTableDataSource<IUser>(this.elementData);
+          this.dataSource.paginator = this.paginator;
+          this.table.renderRows();
+        }
+      }
+    });
   }
 }

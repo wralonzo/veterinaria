@@ -11,9 +11,9 @@
       <mat-card-subtitle>Correo: {{ user.email }}</mat-card-subtitle>
     </mat-card-header>
     <img
-      *ngIf="images"
+      *ngIf="images.length > 0"
       mat-card-image
-      [src]="images[0].url"
+      [src]="images[images.length - 1].url"
       width="20%"
       alt="Photo of a Shiba Inu"
     />
@@ -25,5 +25,5 @@
 </ng-container>
 
 <ng-container *ngIf="images" matColumnDef="symbol">
-  <img *ngFor="let image of images" width="10%" [src]="image.url" />
+  <img *ngFor="let image of images" width="10%"  height="20%" [src]="image.url" />
 </ng-container>

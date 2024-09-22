@@ -22,6 +22,8 @@ export class ProfileComponent {
     passwordGenerate: '',
     apps: [],
     rols: [],
+    mobile: '',
+    type: ''
   };
   public images: any = [];
   constructor(private axiosService: AxiosService) {}
