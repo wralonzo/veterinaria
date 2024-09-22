@@ -12,6 +12,7 @@ import { ReservationComponent } from './layers/reservation/reservation.component
 import { ConstancyComponent } from './layers/constancy/constancy.component';
 import { PetTrackingComponent } from './layers/client/tracking-pet/pet.tracking.component';
 import { ProfileComponent } from './layers/profile/profile.component';
+import { MedicamentosComponent } from './layers/medicamentos/medicamentos';
 
 export const routes: Routes = [
   { path: 'login', title: 'Inicio de sesion', component: LoginComponent },
@@ -82,6 +83,13 @@ export const routes: Routes = [
         path: 'constancy',
         title: 'Constancias',
         component: ConstancyComponent,
+        canActivate: [AuthGuard],
+        data: { rols: ['admin', 'vendor'] },
+      },
+      {
+        path: 'medicamentos',
+        title: 'Medicamentos',
+        component: MedicamentosComponent,
         canActivate: [AuthGuard],
         data: { rols: ['admin', 'vendor'] },
       },
