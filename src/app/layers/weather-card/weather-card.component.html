@@ -1,0 +1,18 @@
+<div class="card" (click)="toggleDetails()">
+  <div class="card-body">
+    <strong class="card-title">Fecha: {{ weatherData.date }}</strong>
+    <p class="card-text">
+      Promedio de temperatura: {{ weatherData.avgtempC }}°C <br />
+      Mínima: {{ weatherData.mintempC }}°C - Máxima:
+      {{ weatherData.maxtempC }}°C
+    </p>
+
+    <!-- Detalles adicionales que se muestran cuando el usuario hace clic -->
+    <div *ngIf="showDetails" class="details">
+      <p>Horas de sol: {{ weatherData.sunHour }}</p>
+      <p>Índice UV: {{ weatherData.uvIndex }}</p>
+      <p>Salida del sol: {{ weatherData.astronomy[0].sunrise }}</p>
+      <p>Puesta del sol: {{ weatherData.astronomy[0].sunset }}</p>
+    </div>
+  </div>
+</div>

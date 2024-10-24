@@ -1,0 +1,31 @@
+.weather-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.city-input {
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 5px;
+  font-size: 16px;
+}
+/* weather-card.component.css */
+.card {
+  margin: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+}
+.details {
+  margin-top: 10px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+}

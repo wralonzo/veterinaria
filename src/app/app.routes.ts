@@ -13,6 +13,7 @@ import { ConstancyComponent } from './layers/constancy/constancy.component';
 import { PetTrackingComponent } from './layers/client/tracking-pet/pet.tracking.component';
 import { ProfileComponent } from './layers/profile/profile.component';
 import { MedicamentosComponent } from './layers/medicamentos/medicamentos';
+import { TimeComponent } from './layers/time/time.component';
 
 export const routes: Routes = [
   { path: 'login', title: 'Inicio de sesion', component: LoginComponent },
@@ -107,10 +108,17 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         data: { rols: ['admin', 'vendor'] },
       },
+      {
+        path: 'time',
+        title: 'Tiempo',
+        component: TimeComponent,
+        canActivate: [AuthGuard],
+        data: { rols: ['admin', 'vendor'] },
+      },
     ],
   },
   {
     path: '**',
-    redirectTo: 'admin',
+    redirectTo: 'admin/time',
   },
 ];

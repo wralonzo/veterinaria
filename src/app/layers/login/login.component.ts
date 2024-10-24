@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('rols', JSON.stringify(data.rols));
           localStorage.setItem('apps', JSON.stringify(data.apps));
           localStorage.setItem('idUser', data.idUser);
-          this.router.navigateByUrl('/admin');
+          this.router.navigateByUrl('/admin/time');
         }
       } catch (error) {
         console.error(error);
